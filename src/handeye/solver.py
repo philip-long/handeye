@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import itertools
+#import itertools
 import numpy as np
 import scipy.linalg
 import baldor as br
@@ -62,7 +62,7 @@ class SolverBase(object):
     """
     C = []
     d = []
-    for Ai,Bi in itertools.izip(A, B):
+    for Ai,Bi in zip(A, B):
       ta = Ai[:3,3]
       tb = Bi[:3,3]
       C.append(Ai[:3,:3]-np.eye(3))
@@ -136,7 +136,7 @@ class ParkBryan1994(SolverBase):
   """
   def __call__(self, A, B):
     M = np.zeros((3,3))
-    for Ai,Bi in itertools.izip(A, B):
+    for Ai,Bi in zip(A, B):
       # Transform the matrices to their axis-angle representation
       axis,angle,_ = br.transform.to_axis_angle(Ai)
       alpha = angle*axis
@@ -165,7 +165,7 @@ class TsaiLenz1989(SolverBase):
     norm = np.linalg.norm
     C = []
     d = []
-    for Ai,Bi in itertools.izip(A, B):
+    for Ai,Bi in zip(A, B):
       # Transform the matrices to their axis-angle representation
       r_gij, theta_gij, _ = br.transform.to_axis_angle(Ai)
       r_cij, theta_cij, _ = br.transform.to_axis_angle(Bi)

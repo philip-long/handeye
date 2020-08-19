@@ -44,7 +44,7 @@ def calibration_cb(req):
   except NotImplementedError:
     rospy.logwarn('Only Moving setup is supported')
     return response
-  for i in xrange(num_object_poses):
+  for i in range(num_object_poses):
     Q = cu.conversions.from_pose(req.effector_wrt_world.poses[i])
     P = cu.conversions.from_pose(req.object_wrt_sensor.poses[i])
     calibrator.add_sample(Q, P)
